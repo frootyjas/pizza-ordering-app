@@ -170,7 +170,8 @@ namespace pizza_ordering_app
                 imgBytes = ms.ToArray();
             }
 
-            string connStr = "server=localhost;user id=root;password=;database=pizza_app;";
+           // string connStr = "server=localhost;user id=root;password=;database=pizza_app;";
+            string connStr = "server=sql12.freesqldatabase.com;user id=sql12772758;password=ZfPWDQ2dFW;database=sql12772758;";
 
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
@@ -218,7 +219,8 @@ namespace pizza_ordering_app
 
         private void LoadProducts()
         {
-            string connStr = "server=localhost;user id=root;password=;database=pizza_app;";
+            //string connStr = "server=localhost;user id=root;password=;database=pizza_app;";
+            string connStr = "server=sql12.freesqldatabase.com;user id=sql12772758;password=ZfPWDQ2dFW;database=sql12772758;";
 
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
@@ -287,7 +289,8 @@ namespace pizza_ordering_app
 
                 if (confirm == DialogResult.Yes)
                 {
-                    string connStr = "server=localhost;user id=root;password=;database=pizza_app;";
+                    //string connStr = "server=localhost;user id=root;password=;database=pizza_app;";
+                    string connStr = "server=sql12.freesqldatabase.com;user id=sql12772758;password=ZfPWDQ2dFW;database=sql12772758;";
 
                     using (MySqlConnection conn = new MySqlConnection(connStr))
                     {

@@ -13,7 +13,8 @@ namespace pizza_ordering_app
             InitializeComponent();
         }
 
-        string connStr = "server=localhost;user id=root;password=;database=pizza_app;";
+        //string connStr = "server=localhost;user id=root;password=;database=pizza_app;";
+        string connStr = "server=sql12.freesqldatabase.com;user id=sql12772758;password=ZfPWDQ2dFW;database=sql12772758;";
 
         private void Form1_Load(object sender, EventArgs e)
         {
