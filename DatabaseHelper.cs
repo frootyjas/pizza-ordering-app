@@ -8,6 +8,8 @@ namespace pizza_ordering_app
             "server=sql12.freesqldatabase.com;user id=sql12772758;password=ZfPWDQ2dFW;database=sql12772758;";
         //private static readonly string ConnectionString = 
         //    "server=localhost;user id=root;password=;database=pizza_app;";
+
+
         public static MySqlConnection GetConnection()
         {
             return new MySqlConnection(ConnectionString);
