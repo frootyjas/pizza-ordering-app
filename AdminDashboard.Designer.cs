@@ -196,7 +196,7 @@ namespace pizza_ordering_app
             this.label1.Size = new System.Drawing.Size(143, 25);
             this.label1.TabIndex = 4;
             this.label1.Text = "Ingredients";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+          
             // 
             // btnSave
             // 
@@ -209,7 +209,7 @@ namespace pizza_ordering_app
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+        
             // 
             // btnAdd
             // 
@@ -222,7 +222,7 @@ namespace pizza_ordering_app
             this.btnAdd.TabIndex = 2;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+
             // 
             // dgvProducts
             // 
@@ -244,7 +244,7 @@ namespace pizza_ordering_app
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducts.Size = new System.Drawing.Size(787, 221);
             this.dgvProducts.TabIndex = 1;
-            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
+          
             // 
             // name
             // 
