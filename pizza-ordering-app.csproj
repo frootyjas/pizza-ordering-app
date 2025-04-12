@@ -183,6 +183,10 @@
     <None Include="Resources\{591C40BD-C657-44A8-BD3D-676C05E00135}.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Beige Red Fun Food Pizza Loyalty Card %283%29.png" />
+    <None Include="Resources\Beige Red Fun Food Pizza Loyalty Card %283%291.png" />
+    <None Include="Resources\Beige Red Fun Food Pizza Loyalty Card %283%292.png" />
+    <None Include="Resources\Beige Red Fun Food Pizza Loyalty Card %283%293.png" />
     <Content Include="Resources\delete.png" />
     <Content Include="Resources\edit.png" />
   </ItemGroup>

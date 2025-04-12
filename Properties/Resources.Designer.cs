@@ -143,6 +143,46 @@ namespace pizza_ordering_app.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Beige_Red_Fun_Food_Pizza_Loyalty_Card__3_ {
+            get {
+                object obj = ResourceManager.GetObject("Beige Red Fun Food Pizza Loyalty Card (3)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Beige_Red_Fun_Food_Pizza_Loyalty_Card__3_1 {
+            get {
+                object obj = ResourceManager.GetObject("Beige Red Fun Food Pizza Loyalty Card (3)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Beige_Red_Fun_Food_Pizza_Loyalty_Card__3_2 {
+            get {
+                object obj = ResourceManager.GetObject("Beige Red Fun Food Pizza Loyalty Card (3)2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Beige_Red_Fun_Food_Pizza_Loyalty_Card__3_3 {
+            get {
+                object obj = ResourceManager.GetObject("Beige Red Fun Food Pizza Loyalty Card (3)3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap c {
             get {
                 object obj = ResourceManager.GetObject("c", resourceCulture);

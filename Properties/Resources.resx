@@ -121,40 +121,52 @@
   <data name="Beige Red Fun Food Pizza Loyalty Card (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Beige Red Fun Food Pizza Loyalty Card (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Beige Red Fun Food Pizza Loyalty Card (1)1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Beige Red Fun Food Pizza Loyalty Card (1)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Beige Red Fun Food Pizza Loyalty Card (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Beige Red Fun Food Pizza Loyalty Card (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Beige Red Fun Food Pizza Loyalty Card (3)1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Beige Red Fun Food Pizza Loyalty Card (3)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="b" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Red and Green Modern Pizza Presentation (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Red and Green Modern Pizza Presentation (1).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Red and Green Modern Pizza Presentation (1)1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Red and Green Modern Pizza Presentation (1)1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Beige Red Fun Food Pizza Loyalty Card (3)2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Beige Red Fun Food Pizza Loyalty Card (3)2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="{591C40BD-C657-44A8-BD3D-676C05E00135}" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\{591C40BD-C657-44A8-BD3D-676C05E00135}.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="w" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\w.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="{58DE3E7E-5C20-4D21-B9B4-AA9D72C03A49}" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\{58DE3E7E-5C20-4D21-B9B4-AA9D72C03A49}.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="c" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\c.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Red and Green Modern Pizza Presentation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Red and Green Modern Pizza Presentation.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="{CBA85D62-306A-4A06-A6A6-B6023109F900}" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\{CBA85D62-306A-4A06-A6A6-B6023109F900}.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Beige Red Fun Food Pizza Loyalty Card (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Beige Red Fun Food Pizza Loyalty Card (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Beige Red Fun Food Pizza Loyalty Card" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Beige Red Fun Food Pizza Loyalty Card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Red and Green Modern Pizza Presentation" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Red and Green Modern Pizza Presentation.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Red and Green Modern Pizza Presentation (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Red and Green Modern Pizza Presentation (1).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Red and Green Modern Pizza Presentation (1)1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Red and Green Modern Pizza Presentation (1)1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="{58DE3E7E-5C20-4D21-B9B4-AA9D72C03A49}" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\{58DE3E7E-5C20-4D21-B9B4-AA9D72C03A49}.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="{591C40BD-C657-44A8-BD3D-676C05E00135}" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\{591C40BD-C657-44A8-BD3D-676C05E00135}.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Beige Red Fun Food Pizza Loyalty Card (1)1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Beige Red Fun Food Pizza Loyalty Card (1)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Beige Red Fun Food Pizza Loyalty Card (3)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Beige Red Fun Food Pizza Loyalty Card (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="c" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\c.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Beige Red Fun Food Pizza Loyalty Card (3)3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Beige Red Fun Food Pizza Loyalty Card (3)3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

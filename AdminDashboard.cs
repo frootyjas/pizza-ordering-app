@@ -322,5 +322,10 @@ namespace pizza_ordering_app
                 Close();
             }
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
