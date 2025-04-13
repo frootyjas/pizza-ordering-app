@@ -13,9 +13,6 @@ namespace pizza_ordering_app
             InitializeComponent();
         }
 
-        //string connStr = "server=localhost;user id=root;password=;database=pizza_app;";
-        string connStr = "server=sql12.freesqldatabase.com;user id=sql12772758;password=ZfPWDQ2dFW;database=sql12772758;";
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -23,10 +20,12 @@ namespace pizza_ordering_app
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.Text.Trim();
-            string password = txtPassword.Text.Trim();
+            //string username = txtUsername.Text.Trim();
+            //string password = txtPassword.Text.Trim();
+            string username = "admin1";
+            string password = "adminpass";
 
-            using (MySqlConnection conn = new MySqlConnection(connStr))
+            using (var conn = DatabaseHelper.GetConnection())
             {
                 try
                 {
