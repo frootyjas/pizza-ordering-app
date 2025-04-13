@@ -48,6 +48,9 @@ namespace pizza_ordering_app
             dgvProducts.AllowUserToAddRows = false;
             dgvProducts.RowTemplate.Height = 60;
 
+            dgvProducts.Columns.Add("id", "ID");
+            dgvProducts.Columns["id"].Visible = false;
+
             dgvProducts.Columns.Add("name", "Name");
             dgvProducts.Columns.Add("price", "Price");
 
@@ -71,7 +74,7 @@ namespace pizza_ordering_app
             dgvProducts.ReadOnly = false;
             dgvProducts.Rows.Add();
             selectedRowIndex = dgvProducts.Rows.Count - 1;
-            dgvProducts.CurrentCell = dgvProducts.Rows[selectedRowIndex].Cells[0];
+            dgvProducts.CurrentCell = dgvProducts.Rows[selectedRowIndex].Cells["name"];
             isEditing = true;
             btnCancel.Visible = true;
         }
@@ -89,7 +92,7 @@ namespace pizza_ordering_app
                 dgvProducts.ReadOnly = false;
                 isEditing = true;
                 btnCancel.Visible = true;
-                dgvProducts.CurrentCell = dgvProducts.Rows[selectedRowIndex].Cells[0];
+                dgvProducts.CurrentCell = dgvProducts.Rows[selectedRowIndex].Cells["name"];
             }
             else
             {
@@ -109,10 +112,15 @@ namespace pizza_ordering_app
                 using (var conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
-                    if (ProductExists(row.Cells["name"].Value.ToString(), conn))
-                        UpdateProduct(row, conn);
+
+                    if (row.Cells["id"].Value != null && int.TryParse(row.Cells["id"].Value.ToString(), out int productId))
+                    {
+                        UpdateProduct(row, conn, productId);
+                    }
                     else
+                    {
                         InsertProduct(row, conn);
+                    }
                 }
 
                 ResetEditingState();
@@ -139,12 +147,21 @@ namespace pizza_ordering_app
                 return;
             }
 
-            var productName = dgvProducts.Rows[selectedRowIndex].Cells["name"].Value?.ToString();
+            var row = dgvProducts.Rows[selectedRowIndex];
+            var productName = row.Cells["name"].Value?.ToString();
+
             if (ConfirmDelete(productName))
             {
-                DeleteProduct(productName);
-                LoadProducts();
-                selectedRowIndex = -1;
+                if (int.TryParse(row.Cells["id"].Value?.ToString(), out int productId))
+                {
+                    DeleteProduct(productId);
+                    LoadProducts();
+                    selectedRowIndex = -1;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid product selected.");
+                }
             }
         }
 
@@ -172,7 +189,7 @@ namespace pizza_ordering_app
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
-                using (var cmd = DatabaseHelper.CreateCommand("SELECT name, price, image FROM products", conn))
+                using (var cmd = DatabaseHelper.CreateCommand("SELECT id, name, price, image FROM products", conn))
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -181,6 +198,7 @@ namespace pizza_ordering_app
                         using (var ms = new MemoryStream(imgBytes))
                         {
                             dgvProducts.Rows.Add(
+                                reader["id"],
                                 reader["name"],
                                 reader["price"],
                                 Image.FromStream(ms)
@@ -199,23 +217,24 @@ namespace pizza_ordering_app
             cmd.ExecuteNonQuery();
         }
 
-        private void UpdateProduct(DataGridViewRow row, MySqlConnection conn)
+        private void UpdateProduct(DataGridViewRow row, MySqlConnection conn, int id)
         {
             var cmd = DatabaseHelper.CreateCommand(
-                "UPDATE products SET price=@price, image=@image WHERE name=@name", conn);
+                "UPDATE products SET name=@name, price=@price, image=@image WHERE id=@id", conn);
             AddCommonParameters(cmd, row);
+            cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
         }
 
-        private void DeleteProduct(string productName)
+        private void DeleteProduct(int id)
         {
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
                 using (var cmd = DatabaseHelper.CreateCommand(
-                    "DELETE FROM products WHERE name = @name", conn))
+                    "DELETE FROM products WHERE id = @id", conn))
                 {
-                    cmd.Parameters.AddWithValue("@name", productName);
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -263,16 +282,6 @@ namespace pizza_ordering_app
             selectedRowIndex = -1;
         }
 
-        private bool ProductExists(string name, MySqlConnection conn)
-        {
-            using (var cmd = DatabaseHelper.CreateCommand(
-                "SELECT COUNT(*) FROM products WHERE name = @name", conn))
-            {
-                cmd.Parameters.AddWithValue("@name", name);
-                return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
-            }
-        }
-
         private void AddCommonParameters(MySqlCommand cmd, DataGridViewRow row)
         {
             cmd.Parameters.AddWithValue("@name", row.Cells["name"].Value);
@@ -309,7 +318,6 @@ namespace pizza_ordering_app
         }
         #endregion
 
-        // Existing sales/inventory toggle methods
         private void BtnSales_Click(object sender, EventArgs e) => panelInventory.Visible = false;
         private void BtnInventory_Click(object sender, EventArgs e) => panelInventory.Visible = true;
         private void btnLogout_Click(object sender, EventArgs e) => ConfirmLogout();
@@ -325,7 +333,6 @@ namespace pizza_ordering_app
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
     }
 }
