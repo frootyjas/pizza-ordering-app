@@ -36,8 +36,17 @@ namespace pizza_ordering_app
             this.btnInventory = new System.Windows.Forms.Button();
             this.btnSales = new System.Windows.Forms.Button();
             this.panelInventory = new System.Windows.Forms.Panel();
+            this.btnIngCancel = new System.Windows.Forms.Button();
+            this.btnIngDelete = new System.Windows.Forms.Button();
+            this.btnIngEdit = new System.Windows.Forms.Button();
+            this.btnIngSave = new System.Windows.Forms.Button();
+            this.btnIngAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvIngredients = new System.Windows.Forms.DataGridView();
+            this.ingItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ingServingSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ingStockAvailable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,19 +59,8 @@ namespace pizza_ordering_app
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ingName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ingUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ingNoOfServings = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ingServingsAvailable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.panelInventory.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -115,13 +113,13 @@ namespace pizza_ordering_app
             // 
             // panelInventory
             // 
-            this.panelInventory.Controls.Add(this.button1);
-            this.panelInventory.Controls.Add(this.button2);
-            this.panelInventory.Controls.Add(this.button3);
-            this.panelInventory.Controls.Add(this.button4);
-            this.panelInventory.Controls.Add(this.button5);
+            this.panelInventory.Controls.Add(this.btnIngCancel);
+            this.panelInventory.Controls.Add(this.btnIngDelete);
+            this.panelInventory.Controls.Add(this.btnIngEdit);
+            this.panelInventory.Controls.Add(this.btnIngSave);
+            this.panelInventory.Controls.Add(this.btnIngAdd);
             this.panelInventory.Controls.Add(this.btnCancel);
-            this.panelInventory.Controls.Add(this.dataGridView1);
+            this.panelInventory.Controls.Add(this.dgvIngredients);
             this.panelInventory.Controls.Add(this.btnDelete);
             this.panelInventory.Controls.Add(this.btnEdit);
             this.panelInventory.Controls.Add(this.label1);
@@ -134,6 +132,64 @@ namespace pizza_ordering_app
             this.panelInventory.Size = new System.Drawing.Size(839, 547);
             this.panelInventory.TabIndex = 0;
             // 
+            // btnIngCancel
+            // 
+            this.btnIngCancel.Location = new System.Drawing.Point(457, 283);
+            this.btnIngCancel.Name = "btnIngCancel";
+            this.btnIngCancel.Size = new System.Drawing.Size(67, 25);
+            this.btnIngCancel.TabIndex = 13;
+            this.btnIngCancel.Text = "Cancel";
+            this.btnIngCancel.UseVisualStyleBackColor = true;
+            this.btnIngCancel.Visible = false;
+            // 
+            // btnIngDelete
+            // 
+            this.btnIngDelete.BackgroundImage = global::pizza_ordering_app.Properties.Resources.Red_and_Green_Modern_Pizza_Presentation;
+            this.btnIngDelete.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngDelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnIngDelete.Location = new System.Drawing.Point(749, 283);
+            this.btnIngDelete.Name = "btnIngDelete";
+            this.btnIngDelete.Size = new System.Drawing.Size(67, 25);
+            this.btnIngDelete.TabIndex = 12;
+            this.btnIngDelete.Text = "Delete";
+            this.btnIngDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnIngEdit
+            // 
+            this.btnIngEdit.BackgroundImage = global::pizza_ordering_app.Properties.Resources._591C40BD_C657_44A8_BD3D_676C05E00135_;
+            this.btnIngEdit.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngEdit.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnIngEdit.Location = new System.Drawing.Point(603, 283);
+            this.btnIngEdit.Name = "btnIngEdit";
+            this.btnIngEdit.Size = new System.Drawing.Size(67, 25);
+            this.btnIngEdit.TabIndex = 11;
+            this.btnIngEdit.Text = "Edit";
+            this.btnIngEdit.UseVisualStyleBackColor = true;
+            // 
+            // btnIngSave
+            // 
+            this.btnIngSave.BackgroundImage = global::pizza_ordering_app.Properties.Resources._58DE3E7E_5C20_4D21_B9B4_AA9D72C03A49_;
+            this.btnIngSave.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngSave.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnIngSave.Location = new System.Drawing.Point(676, 283);
+            this.btnIngSave.Name = "btnIngSave";
+            this.btnIngSave.Size = new System.Drawing.Size(67, 25);
+            this.btnIngSave.TabIndex = 10;
+            this.btnIngSave.Text = "Save";
+            this.btnIngSave.UseVisualStyleBackColor = true;
+            // 
+            // btnIngAdd
+            // 
+            this.btnIngAdd.BackgroundImage = global::pizza_ordering_app.Properties.Resources._CBA85D62_306A_4A06_A6A6_B6023109F900_;
+            this.btnIngAdd.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngAdd.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnIngAdd.Location = new System.Drawing.Point(530, 283);
+            this.btnIngAdd.Name = "btnIngAdd";
+            this.btnIngAdd.Size = new System.Drawing.Size(67, 25);
+            this.btnIngAdd.TabIndex = 9;
+            this.btnIngAdd.Text = "Add";
+            this.btnIngAdd.UseVisualStyleBackColor = true;
+            // 
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(457, 0);
@@ -144,29 +200,55 @@ namespace pizza_ordering_app
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Visible = false;
             // 
-            // dataGridView1
+            // dgvIngredients
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id,
-            this.ingName,
-            this.ingUnitPrice,
-            this.ingNoOfServings,
+            this.dgvIngredients.AllowUserToAddRows = false;
+            this.dgvIngredients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvIngredients.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvIngredients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvIngredients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ingItem,
+            this.ingServingSize,
             this.ingPrice,
-            this.ingServingsAvailable});
-            this.dataGridView1.Font = new System.Drawing.Font("Arial", 10F);
-            this.dataGridView1.Location = new System.Drawing.Point(29, 323);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(787, 221);
-            this.dataGridView1.TabIndex = 7;
+            this.ingStockAvailable});
+            this.dgvIngredients.Font = new System.Drawing.Font("Arial", 10F);
+            this.dgvIngredients.Location = new System.Drawing.Point(29, 323);
+            this.dgvIngredients.MultiSelect = false;
+            this.dgvIngredients.Name = "dgvIngredients";
+            this.dgvIngredients.ReadOnly = true;
+            this.dgvIngredients.RowHeadersWidth = 51;
+            this.dgvIngredients.RowTemplate.Height = 24;
+            this.dgvIngredients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvIngredients.Size = new System.Drawing.Size(787, 221);
+            this.dgvIngredients.TabIndex = 7;
+            // 
+            // ingItem
+            // 
+            this.ingItem.HeaderText = "Item";
+            this.ingItem.MinimumWidth = 6;
+            this.ingItem.Name = "ingItem";
+            this.ingItem.ReadOnly = true;
+            // 
+            // ingServingSize
+            // 
+            this.ingServingSize.HeaderText = "Serving Size";
+            this.ingServingSize.MinimumWidth = 6;
+            this.ingServingSize.Name = "ingServingSize";
+            this.ingServingSize.ReadOnly = true;
+            // 
+            // ingPrice
+            // 
+            this.ingPrice.HeaderText = "Price per Serving";
+            this.ingPrice.MinimumWidth = 6;
+            this.ingPrice.Name = "ingPrice";
+            this.ingPrice.ReadOnly = true;
+            // 
+            // ingStockAvailable
+            // 
+            this.ingStockAvailable.HeaderText = "Stock Available";
+            this.ingStockAvailable.MinimumWidth = 6;
+            this.ingStockAvailable.Name = "ingStockAvailable";
+            this.ingStockAvailable.ReadOnly = true;
             // 
             // btnDelete
             // 
@@ -282,7 +364,6 @@ namespace pizza_ordering_app
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(147, 571);
             this.panel1.TabIndex = 5;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // pictureBox1
             // 
@@ -294,106 +375,6 @@ namespace pizza_ordering_app
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "Ingredient ID";
-            this.id.MinimumWidth = 6;
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // ingName
-            // 
-            this.ingName.HeaderText = "Item";
-            this.ingName.MinimumWidth = 6;
-            this.ingName.Name = "ingName";
-            this.ingName.ReadOnly = true;
-            // 
-            // ingUnitPrice
-            // 
-            this.ingUnitPrice.HeaderText = "Unit Price";
-            this.ingUnitPrice.MinimumWidth = 6;
-            this.ingUnitPrice.Name = "ingUnitPrice";
-            this.ingUnitPrice.ReadOnly = true;
-            // 
-            // ingNoOfServings
-            // 
-            this.ingNoOfServings.HeaderText = "No. of Servings";
-            this.ingNoOfServings.MinimumWidth = 6;
-            this.ingNoOfServings.Name = "ingNoOfServings";
-            this.ingNoOfServings.ReadOnly = true;
-            // 
-            // ingPrice
-            // 
-            this.ingPrice.HeaderText = "Price per Serving";
-            this.ingPrice.MinimumWidth = 6;
-            this.ingPrice.Name = "ingPrice";
-            this.ingPrice.ReadOnly = true;
-            // 
-            // ingServingsAvailable
-            // 
-            this.ingServingsAvailable.HeaderText = "Servings Available";
-            this.ingServingsAvailable.MinimumWidth = 6;
-            this.ingServingsAvailable.Name = "ingServingsAvailable";
-            this.ingServingsAvailable.ReadOnly = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(457, 283);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 25);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = global::pizza_ordering_app.Properties.Resources.Red_and_Green_Modern_Pizza_Presentation;
-            this.button2.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.Location = new System.Drawing.Point(749, 283);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(67, 25);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImage = global::pizza_ordering_app.Properties.Resources._591C40BD_C657_44A8_BD3D_676C05E00135_;
-            this.button3.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button3.Location = new System.Drawing.Point(603, 283);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(67, 25);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "Edit";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.BackgroundImage = global::pizza_ordering_app.Properties.Resources._58DE3E7E_5C20_4D21_B9B4_AA9D72C03A49_;
-            this.button4.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.Location = new System.Drawing.Point(676, 283);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(67, 25);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "Save";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.BackgroundImage = global::pizza_ordering_app.Properties.Resources._CBA85D62_306A_4A06_A6A6_B6023109F900_;
-            this.button5.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button5.Location = new System.Drawing.Point(530, 283);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(67, 25);
-            this.button5.TabIndex = 9;
-            this.button5.Text = "Add";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // AdminDashboard
             // 
@@ -407,10 +388,10 @@ namespace pizza_ordering_app
             this.Controls.Add(this.panel1);
             this.Name = "AdminDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Admin";
+            this.Text = "/";
             this.panelInventory.ResumeLayout(false);
             this.panelInventory.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -437,18 +418,16 @@ namespace pizza_ordering_app
         private Label label1;
         private Button btnDelete;
         private Button btnEdit;
-        private DataGridView dataGridView1;
+        private DataGridView dgvIngredients;
         private Button btnCancel;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private DataGridViewTextBoxColumn id;
-        private DataGridViewTextBoxColumn ingName;
-        private DataGridViewTextBoxColumn ingUnitPrice;
-        private DataGridViewTextBoxColumn ingNoOfServings;
+        private Button btnIngCancel;
+        private Button btnIngDelete;
+        private Button btnIngEdit;
+        private Button btnIngSave;
+        private Button btnIngAdd;
+        private DataGridViewTextBoxColumn ingItem;
+        private DataGridViewTextBoxColumn ingServingSize;
         private DataGridViewTextBoxColumn ingPrice;
-        private DataGridViewTextBoxColumn ingServingsAvailable;
+        private DataGridViewTextBoxColumn ingStockAvailable;
     }
 }

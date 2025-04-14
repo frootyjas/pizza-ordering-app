@@ -11,13 +11,16 @@ namespace pizza_ordering_app
     {
         private int selectedRowIndex = -1;
         private bool isEditing = false;
+        private bool isEditingIngredient = false;
 
         public AdminDashboard()
         {
             InitializeComponent();
             InitializeEventHandlers();
             SetupProductGrid();
+            SetupIngredientGrid();
             LoadProducts();
+            LoadIngredients();
         }
 
         private void InitializeEventHandlers()
@@ -31,12 +34,20 @@ namespace pizza_ordering_app
             btnDelete.Click += BtnDelete_Click;
             btnCancel.Click += BtnCancel_Click;
             dgvProducts.CellClick += DgvProducts_CellClick;
+
+            btnIngAdd.Click += BtnIngAdd_Click;
+            btnIngSave.Click += BtnIngSave_Click;
+            btnIngEdit.Click += BtnIngEdit_Click;
+            btnIngDelete.Click += BtnIngDelete_Click;
+            btnIngCancel.Click += BtnIngCancel_Click;
+            dgvIngredients.CellClick += DgvIngredients_CellClick;
         }
 
         private void AdminDashboard_Load(object sender, EventArgs e)
         {
             panelInventory.Visible = false;
             btnCancel.Visible = false;
+            btnIngCancel.Visible = false;
         }
 
         private void SetupProductGrid()
@@ -63,133 +74,29 @@ namespace pizza_ordering_app
             dgvProducts.Columns.Add(imageCol);
         }
 
-        private void BtnAdd_Click(object sender, EventArgs e)
+        private void SetupIngredientGrid()
         {
-            if (isEditing)
-            {
-                MessageBox.Show("Please save or cancel current operation first.");
-                return;
-            }
+            dgvIngredients.Columns.Clear();
+            dgvIngredients.ReadOnly = true;
+            dgvIngredients.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvIngredients.MultiSelect = false;
+            dgvIngredients.AllowUserToAddRows = false;
 
-            dgvProducts.ReadOnly = false;
-            dgvProducts.Rows.Add();
-            selectedRowIndex = dgvProducts.Rows.Count - 1;
-            dgvProducts.CurrentCell = dgvProducts.Rows[selectedRowIndex].Cells["name"];
-            isEditing = true;
-            btnCancel.Visible = true;
+            dgvIngredients.Columns.Add("id", "ID");
+            dgvIngredients.Columns["id"].Visible = false;
+            dgvIngredients.Columns.Add("ingItem", "Item");
+            dgvIngredients.Columns.Add("ingServingSize", "Serving Size");
+            dgvIngredients.Columns.Add("ingPrice", "Price per Serving");
+            dgvIngredients.Columns.Add("ingStockAvailable", "Stock Available");
         }
 
-        private void BtnEdit_Click(object sender, EventArgs e)
-        {
-            if (isEditing)
-            {
-                MessageBox.Show("Finish current operation before editing another.");
-                return;
-            }
-
-            if (selectedRowIndex >= 0 && selectedRowIndex < dgvProducts.Rows.Count)
-            {
-                dgvProducts.ReadOnly = false;
-                isEditing = true;
-                btnCancel.Visible = true;
-                dgvProducts.CurrentCell = dgvProducts.Rows[selectedRowIndex].Cells["name"];
-            }
-            else
-            {
-                MessageBox.Show("Please select a product to edit.");
-            }
-        }
-
-        private void BtnSave_Click(object sender, EventArgs e)
-        {
-            if (selectedRowIndex < 0 || selectedRowIndex >= dgvProducts.Rows.Count) return;
-
-            var row = dgvProducts.Rows[selectedRowIndex];
-            if (!ValidateRow(row)) return;
-
-            try
-            {
-                using (var conn = DatabaseHelper.GetConnection())
-                {
-                    conn.Open();
-
-                    if (row.Cells["id"].Value != null && int.TryParse(row.Cells["id"].Value.ToString(), out int productId))
-                    {
-                        UpdateProduct(row, conn, productId);
-                    }
-                    else
-                    {
-                        InsertProduct(row, conn);
-                    }
-                }
-
-                ResetEditingState();
-                LoadProducts();
-                MessageBox.Show("Product saved successfully!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving product: {ex.Message}");
-            }
-        }
-
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            if (isEditing)
-            {
-                MessageBox.Show("Finish editing before deleting.");
-                return;
-            }
-
-            if (selectedRowIndex < 0 || selectedRowIndex >= dgvProducts.Rows.Count)
-            {
-                MessageBox.Show("Please select a product to delete.");
-                return;
-            }
-
-            var row = dgvProducts.Rows[selectedRowIndex];
-            var productName = row.Cells["name"].Value?.ToString();
-
-            if (ConfirmDelete(productName))
-            {
-                if (int.TryParse(row.Cells["id"].Value?.ToString(), out int productId))
-                {
-                    DeleteProduct(productId);
-                    LoadProducts();
-                    selectedRowIndex = -1;
-                }
-                else
-                {
-                    MessageBox.Show("Invalid product selected.");
-                }
-            }
-        }
-
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            ResetEditingState();
-            LoadProducts();
-        }
-
-        private void DgvProducts_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-
-            selectedRowIndex = e.RowIndex;
-            if (dgvProducts.Columns[e.ColumnIndex].Name == "image" && !dgvProducts.ReadOnly)
-            {
-                HandleImageUpload(e.RowIndex);
-            }
-        }
-
-        #region Database Operations
         private void LoadProducts()
         {
             dgvProducts.Rows.Clear();
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
-                using (var cmd = DatabaseHelper.CreateCommand("SELECT id, name, price, image FROM products", conn))
+                var cmd = DatabaseHelper.CreateCommand("SELECT id, name, price, image FROM products", conn);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -209,69 +116,83 @@ namespace pizza_ordering_app
             }
         }
 
-        private void InsertProduct(DataGridViewRow row, MySqlConnection conn)
+        private void LoadIngredients()
         {
-            var cmd = DatabaseHelper.CreateCommand(
-                "INSERT INTO products (name, price, image) VALUES (@name, @price, @image)", conn);
-            AddCommonParameters(cmd, row);
-            cmd.ExecuteNonQuery();
-        }
-
-        private void UpdateProduct(DataGridViewRow row, MySqlConnection conn, int id)
-        {
-            var cmd = DatabaseHelper.CreateCommand(
-                "UPDATE products SET name=@name, price=@price, image=@image WHERE id=@id", conn);
-            AddCommonParameters(cmd, row);
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.ExecuteNonQuery();
-        }
-
-        private void DeleteProduct(int id)
-        {
+            dgvIngredients.Rows.Clear();
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
-                using (var cmd = DatabaseHelper.CreateCommand(
-                    "DELETE FROM products WHERE id = @id", conn))
+                var cmd = DatabaseHelper.CreateCommand("SELECT * FROM ingredients", conn);
+                using (var reader = cmd.ExecuteReader())
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.ExecuteNonQuery();
+                    while (reader.Read())
+                    {
+                        dgvIngredients.Rows.Add(
+                            reader["id"],
+                            reader["name"],
+                            reader["serving_size"],
+                            reader["price_per_serving"],
+                            reader["stock_available"]
+                        );
+                    }
                 }
             }
         }
-        #endregion
 
-        #region Helper Methods
-        private bool ValidateRow(DataGridViewRow row)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(row.Cells["name"].Value?.ToString()))
-            {
-                MessageBox.Show("Product name cannot be empty.");
-                return false;
-            }
-
-            if (!decimal.TryParse(row.Cells["price"].Value?.ToString(), out _))
-            {
-                MessageBox.Show("Invalid price format.");
-                return false;
-            }
-
-            if (row.Cells["image"].Value == null)
-            {
-                MessageBox.Show("Please select an image.");
-                return false;
-            }
-
-            return true;
+            if (isEditing) return;
+            dgvProducts.ReadOnly = false;
+            dgvProducts.Rows.Add();
+            selectedRowIndex = dgvProducts.Rows.Count - 1;
+            dgvProducts.CurrentCell = dgvProducts.Rows[selectedRowIndex].Cells["name"];
+            isEditing = true;
+            btnCancel.Visible = true;
         }
 
-        private bool ConfirmDelete(string productName)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
-            return MessageBox.Show(
-                $"Delete {productName}?",
-                "Confirm Delete",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes;
+            if (isEditing) return;
+            if (dgvProducts.SelectedRows.Count == 0) return;
+            selectedRowIndex = dgvProducts.SelectedRows[0].Index;
+            dgvProducts.ReadOnly = false;
+            isEditing = true;
+            btnCancel.Visible = true;
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            if (selectedRowIndex < 0 || selectedRowIndex >= dgvProducts.Rows.Count) return;
+            var row = dgvProducts.Rows[selectedRowIndex];
+            if (!ValidateRow(row)) return;
+
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                if (row.Cells["id"].Value != null)
+                    UpdateProduct(row, conn, Convert.ToInt32(row.Cells["id"].Value));
+                else
+                    InsertProduct(row, conn);
+            }
+            LoadProducts();
+            ResetEditingState();
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (isEditing || dgvProducts.SelectedRows.Count == 0) return;
+            var row = dgvProducts.SelectedRows[0];
+            if (int.TryParse(row.Cells["id"].Value?.ToString(), out int id))
+            {
+                DeleteProduct(id);
+                LoadProducts();
+            }
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            ResetEditingState();
+            LoadProducts();
         }
 
         private void ResetEditingState()
@@ -282,7 +203,63 @@ namespace pizza_ordering_app
             selectedRowIndex = -1;
         }
 
-        private void AddCommonParameters(MySqlCommand cmd, DataGridViewRow row)
+        private bool ValidateRow(DataGridViewRow row)
+        {
+            if (string.IsNullOrWhiteSpace(row.Cells["name"].Value?.ToString())) return false;
+            if (!decimal.TryParse(row.Cells["price"].Value?.ToString(), out _)) return false;
+            if (row.Cells["image"].Value == null) return false;
+            return true;
+        }
+
+        private void DgvProducts_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            selectedRowIndex = e.RowIndex;
+            if (dgvProducts.Columns[e.ColumnIndex].Name == "image" && !dgvProducts.ReadOnly)
+            {
+                HandleImageUpload(e.RowIndex);
+            }
+        }
+
+        private void HandleImageUpload(int rowIndex)
+        {
+            using (var ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    dgvProducts.Rows[rowIndex].Cells["image"].Value = Image.FromFile(ofd.FileName);
+                }
+            }
+        }
+
+        private void InsertProduct(DataGridViewRow row, MySqlConnection conn)
+        {
+            var cmd = DatabaseHelper.CreateCommand("INSERT INTO products (name, price, image) VALUES (@name, @price, @image)", conn);
+            AddProductParameters(cmd, row);
+            cmd.ExecuteNonQuery();
+        }
+
+        private void UpdateProduct(DataGridViewRow row, MySqlConnection conn, int id)
+        {
+            var cmd = DatabaseHelper.CreateCommand("UPDATE products SET name=@name, price=@price, image=@image WHERE id=@id", conn);
+            AddProductParameters(cmd, row);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+        }
+
+        private void DeleteProduct(int id)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                var cmd = DatabaseHelper.CreateCommand("DELETE FROM products WHERE id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void AddProductParameters(MySqlCommand cmd, DataGridViewRow row)
         {
             cmd.Parameters.AddWithValue("@name", row.Cells["name"].Value);
             cmd.Parameters.AddWithValue("@price", Convert.ToDecimal(row.Cells["price"].Value));
@@ -298,25 +275,120 @@ namespace pizza_ordering_app
             }
         }
 
-        private void HandleImageUpload(int rowIndex)
+        private void BtnIngAdd_Click(object sender, EventArgs e)
         {
-            using (var ofd = new OpenFileDialog())
+            if (isEditingIngredient) return;
+            dgvIngredients.ReadOnly = false;
+            dgvIngredients.Rows.Add();
+            selectedRowIndex = dgvIngredients.Rows.Count - 1;
+            dgvIngredients.CurrentCell = dgvIngredients.Rows[selectedRowIndex].Cells["ingItem"];
+            isEditingIngredient = true;
+            btnIngCancel.Visible = true;
+            MessageBox.Show("Ready to add a new ingredient.", "Add Ingredient", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void BtnIngEdit_Click(object sender, EventArgs e)
+        {
+            if (isEditingIngredient || dgvIngredients.SelectedRows.Count == 0) return;
+            selectedRowIndex = dgvIngredients.SelectedRows[0].Index;
+            dgvIngredients.ReadOnly = false;
+            isEditingIngredient = true;
+            btnIngCancel.Visible = true;
+            MessageBox.Show("Editing ingredient.", "Edit Ingredient", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void BtnIngSave_Click(object sender, EventArgs e)
+        {
+            if (selectedRowIndex < 0 || selectedRowIndex >= dgvIngredients.Rows.Count) return;
+            var row = dgvIngredients.Rows[selectedRowIndex];
+            if (!ValidateIngredientRow(row)) return;
+            using (var conn = DatabaseHelper.GetConnection())
             {
-                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        dgvProducts.Rows[rowIndex].Cells["image"].Value = Image.FromFile(ofd.FileName);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error loading image: {ex.Message}");
-                    }
-                }
+                conn.Open();
+                if (row.Cells["id"].Value != null)
+                    UpdateIngredient(row, conn, Convert.ToInt32(row.Cells["id"].Value));
+                else
+                    InsertIngredient(row, conn);
+            }
+            LoadIngredients();
+            ResetIngredientState();
+            MessageBox.Show("Ingredient saved successfully.", "Save Ingredient", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void BtnIngDelete_Click(object sender, EventArgs e)
+        {
+            if (isEditingIngredient || dgvIngredients.SelectedRows.Count == 0) return;
+            var row = dgvIngredients.SelectedRows[0];
+            if (int.TryParse(row.Cells["id"].Value?.ToString(), out int id))
+            {
+                DeleteIngredient(id);
+                LoadIngredients();
+                MessageBox.Show("Ingredient deleted.", "Delete Ingredient", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        #endregion
+
+        private void BtnIngCancel_Click(object sender, EventArgs e)
+        {
+            ResetIngredientState();
+            LoadIngredients();
+            MessageBox.Show("Cancelled ingredient action.", "Cancel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void DgvIngredients_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+                selectedRowIndex = e.RowIndex;
+        }
+
+        private void ResetIngredientState()
+        {
+            dgvIngredients.ReadOnly = true;
+            isEditingIngredient = false;
+            btnIngCancel.Visible = false;
+            selectedRowIndex = -1;
+        }
+
+        private bool ValidateIngredientRow(DataGridViewRow row)
+        {
+            return !string.IsNullOrWhiteSpace(row.Cells["ingItem"].Value?.ToString()) &&
+                   !string.IsNullOrWhiteSpace(row.Cells["ingServingSize"].Value?.ToString()) &&
+                   decimal.TryParse(row.Cells["ingPrice"].Value?.ToString(), out _) &&
+                   decimal.TryParse(row.Cells["ingStockAvailable"].Value?.ToString(), out _);
+        }
+
+        private void InsertIngredient(DataGridViewRow row, MySqlConnection conn)
+        {
+            var cmd = DatabaseHelper.CreateCommand("INSERT INTO ingredients (name, serving_size, price_per_serving, stock_available) VALUES (@name, @size, @price, @stock)", conn);
+            AddIngredientParameters(cmd, row);
+            cmd.ExecuteNonQuery();
+        }
+
+        private void UpdateIngredient(DataGridViewRow row, MySqlConnection conn, int id)
+        {
+            var cmd = DatabaseHelper.CreateCommand("UPDATE ingredients SET name=@name, serving_size=@size, price_per_serving=@price, stock_available=@stock WHERE id=@id", conn);
+            AddIngredientParameters(cmd, row);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+        }
+
+        private void DeleteIngredient(int id)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                var cmd = DatabaseHelper.CreateCommand("DELETE FROM ingredients WHERE id=@id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void AddIngredientParameters(MySqlCommand cmd, DataGridViewRow row)
+        {
+            cmd.Parameters.AddWithValue("@name", row.Cells["ingItem"].Value?.ToString());
+            cmd.Parameters.AddWithValue("@size", row.Cells["ingServingSize"].Value?.ToString());
+            cmd.Parameters.AddWithValue("@price", Convert.ToDecimal(row.Cells["ingPrice"].Value));
+            cmd.Parameters.AddWithValue("@stock", Convert.ToDecimal(row.Cells["ingStockAvailable"].Value));
+        }
 
         private void BtnSales_Click(object sender, EventArgs e) => panelInventory.Visible = false;
         private void BtnInventory_Click(object sender, EventArgs e) => panelInventory.Visible = true;
@@ -329,10 +401,6 @@ namespace pizza_ordering_app
                 new Login().Show();
                 Close();
             }
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
         }
     }
 }
