@@ -148,6 +148,7 @@ namespace pizza_ordering_app
             dgvProducts.CurrentCell = dgvProducts.Rows[selectedRowIndex].Cells["name"];
             isEditing = true;
             btnCancel.Visible = true;
+            MessageBox.Show("Ready to add a new product.", "Add Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -158,6 +159,7 @@ namespace pizza_ordering_app
             dgvProducts.ReadOnly = false;
             isEditing = true;
             btnCancel.Visible = true;
+            MessageBox.Show("Editing Product.", "Edit Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -176,16 +178,30 @@ namespace pizza_ordering_app
             }
             LoadProducts();
             ResetEditingState();
+            MessageBox.Show("Product saved successfully.", "Save Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (isEditing || dgvProducts.SelectedRows.Count == 0) return;
+
             var row = dgvProducts.SelectedRows[0];
             if (int.TryParse(row.Cells["id"].Value?.ToString(), out int id))
             {
-                DeleteProduct(id);
-                LoadProducts();
+                // Ask for confirmation before deleting
+                var confirmResult = MessageBox.Show(
+                    "Are you sure you want to delete this product?",
+                    "Confirm Deletion",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    DeleteProduct(id);
+                    LoadProducts();
+                    MessageBox.Show("Product deleted.", "Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -193,6 +209,7 @@ namespace pizza_ordering_app
         {
             ResetEditingState();
             LoadProducts();
+            MessageBox.Show("Cancelled product action.", "Cancel", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ResetEditingState()
@@ -318,12 +335,24 @@ namespace pizza_ordering_app
         private void BtnIngDelete_Click(object sender, EventArgs e)
         {
             if (isEditingIngredient || dgvIngredients.SelectedRows.Count == 0) return;
+
             var row = dgvIngredients.SelectedRows[0];
             if (int.TryParse(row.Cells["id"].Value?.ToString(), out int id))
             {
-                DeleteIngredient(id);
-                LoadIngredients();
-                MessageBox.Show("Ingredient deleted.", "Delete Ingredient", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Ask for confirmation before deleting
+                var confirmResult = MessageBox.Show(
+                    "Are you sure you want to delete this ingredient?",
+                    "Confirm Deletion",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    DeleteIngredient(id);
+                    LoadIngredients();
+                    MessageBox.Show("Ingredient deleted.", "Delete Ingredient", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
