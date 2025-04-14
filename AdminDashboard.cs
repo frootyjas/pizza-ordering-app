@@ -73,7 +73,10 @@ namespace pizza_ordering_app
                 ImageLayout = DataGridViewImageCellLayout.Zoom
             };
             dgvProducts.Columns.Add(imageCol);
+
+            dgvProducts.Columns.Add("stocks", "Stocks");
         }
+
 
         private void SetupIngredientGrid()
         {
@@ -97,7 +100,7 @@ namespace pizza_ordering_app
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
-                var cmd = DatabaseHelper.CreateCommand("SELECT id, name, price, image FROM products", conn);
+                var cmd = DatabaseHelper.CreateCommand("SELECT id, name, price, image, stocks FROM products", conn);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -109,7 +112,8 @@ namespace pizza_ordering_app
                                 reader["id"],
                                 reader["name"],
                                 reader["price"],
-                                Image.FromStream(ms)
+                                Image.FromStream(ms),
+                                reader["stocks"]
                             );
                         }
                     }
