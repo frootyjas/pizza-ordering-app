@@ -134,7 +134,7 @@ namespace pizza_ordering_app
             // 
             // btnIngCancel
             // 
-            this.btnIngCancel.Location = new System.Drawing.Point(457, 283);
+            this.btnIngCancel.Location = new System.Drawing.Point(457, 274);
             this.btnIngCancel.Name = "btnIngCancel";
             this.btnIngCancel.Size = new System.Drawing.Size(67, 25);
             this.btnIngCancel.TabIndex = 13;
@@ -147,7 +147,7 @@ namespace pizza_ordering_app
             this.btnIngDelete.BackgroundImage = global::pizza_ordering_app.Properties.Resources.Red_and_Green_Modern_Pizza_Presentation;
             this.btnIngDelete.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIngDelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnIngDelete.Location = new System.Drawing.Point(749, 283);
+            this.btnIngDelete.Location = new System.Drawing.Point(749, 274);
             this.btnIngDelete.Name = "btnIngDelete";
             this.btnIngDelete.Size = new System.Drawing.Size(67, 25);
             this.btnIngDelete.TabIndex = 12;
@@ -159,7 +159,7 @@ namespace pizza_ordering_app
             this.btnIngEdit.BackgroundImage = global::pizza_ordering_app.Properties.Resources._591C40BD_C657_44A8_BD3D_676C05E00135_;
             this.btnIngEdit.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIngEdit.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnIngEdit.Location = new System.Drawing.Point(603, 283);
+            this.btnIngEdit.Location = new System.Drawing.Point(603, 274);
             this.btnIngEdit.Name = "btnIngEdit";
             this.btnIngEdit.Size = new System.Drawing.Size(67, 25);
             this.btnIngEdit.TabIndex = 11;
@@ -171,7 +171,7 @@ namespace pizza_ordering_app
             this.btnIngSave.BackgroundImage = global::pizza_ordering_app.Properties.Resources._58DE3E7E_5C20_4D21_B9B4_AA9D72C03A49_;
             this.btnIngSave.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIngSave.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnIngSave.Location = new System.Drawing.Point(676, 283);
+            this.btnIngSave.Location = new System.Drawing.Point(676, 274);
             this.btnIngSave.Name = "btnIngSave";
             this.btnIngSave.Size = new System.Drawing.Size(67, 25);
             this.btnIngSave.TabIndex = 10;
@@ -183,7 +183,7 @@ namespace pizza_ordering_app
             this.btnIngAdd.BackgroundImage = global::pizza_ordering_app.Properties.Resources._CBA85D62_306A_4A06_A6A6_B6023109F900_;
             this.btnIngAdd.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIngAdd.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnIngAdd.Location = new System.Drawing.Point(530, 283);
+            this.btnIngAdd.Location = new System.Drawing.Point(530, 274);
             this.btnIngAdd.Name = "btnIngAdd";
             this.btnIngAdd.Size = new System.Drawing.Size(67, 25);
             this.btnIngAdd.TabIndex = 9;
@@ -212,14 +212,14 @@ namespace pizza_ordering_app
             this.ingPrice,
             this.ingStockAvailable});
             this.dgvIngredients.Font = new System.Drawing.Font("Arial", 10F);
-            this.dgvIngredients.Location = new System.Drawing.Point(29, 323);
+            this.dgvIngredients.Location = new System.Drawing.Point(29, 305);
             this.dgvIngredients.MultiSelect = false;
             this.dgvIngredients.Name = "dgvIngredients";
             this.dgvIngredients.ReadOnly = true;
             this.dgvIngredients.RowHeadersWidth = 51;
             this.dgvIngredients.RowTemplate.Height = 24;
             this.dgvIngredients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvIngredients.Size = new System.Drawing.Size(787, 221);
+            this.dgvIngredients.Size = new System.Drawing.Size(787, 239);
             this.dgvIngredients.TabIndex = 7;
             // 
             // ingItem
@@ -278,7 +278,7 @@ namespace pizza_ordering_app
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(24, 283);
+            this.label1.Location = new System.Drawing.Point(24, 274);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 25);
             this.label1.TabIndex = 4;
@@ -326,7 +326,7 @@ namespace pizza_ordering_app
             this.dgvProducts.RowHeadersWidth = 51;
             this.dgvProducts.RowTemplate.Height = 24;
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProducts.Size = new System.Drawing.Size(787, 221);
+            this.dgvProducts.Size = new System.Drawing.Size(787, 204);
             this.dgvProducts.TabIndex = 1;
             // 
             // name
