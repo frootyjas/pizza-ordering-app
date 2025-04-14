@@ -159,7 +159,6 @@ namespace pizza_ordering_app
             dgvProducts.CurrentCell = dgvProducts.Rows[selectedRowIndex].Cells["name"];
             isEditing = true;
             btnCancel.Visible = true;
-            MessageBox.Show("Ready to add a new product.", "Add Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -211,7 +210,6 @@ namespace pizza_ordering_app
                 {
                     DeleteProduct(id);
                     LoadProducts();
-                    MessageBox.Show("Product deleted.", "Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -314,7 +312,6 @@ namespace pizza_ordering_app
             dgvIngredients.CurrentCell = dgvIngredients.Rows[selectedRowIndex].Cells["ingItem"];
             isEditingIngredient = true;
             btnIngCancel.Visible = true;
-            MessageBox.Show("Ready to add a new ingredient.", "Add Ingredient", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnIngEdit_Click(object sender, EventArgs e)
@@ -364,7 +361,6 @@ namespace pizza_ordering_app
                 {
                     DeleteIngredient(id);
                     LoadIngredients();
-                    MessageBox.Show("Ingredient deleted.", "Delete Ingredient", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
