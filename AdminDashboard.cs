@@ -236,6 +236,7 @@ namespace pizza_ordering_app
             if (string.IsNullOrWhiteSpace(row.Cells["name"].Value?.ToString())) return false;
             if (!decimal.TryParse(row.Cells["price"].Value?.ToString(), out _)) return false;
             if (row.Cells["image"].Value == null) return false;
+            if (!int.TryParse(row.Cells["stocks"].Value?.ToString(), out _)) return false;
             return true;
         }
 
@@ -263,14 +264,14 @@ namespace pizza_ordering_app
 
         private void InsertProduct(DataGridViewRow row, MySqlConnection conn)
         {
-            var cmd = DatabaseHelper.CreateCommand("INSERT INTO products (name, price, image) VALUES (@name, @price, @image)", conn);
+            var cmd = DatabaseHelper.CreateCommand("INSERT INTO products (name, price, image, stocks) VALUES (@name, @price, @image, @stocks)", conn);
             AddProductParameters(cmd, row);
             cmd.ExecuteNonQuery();
         }
 
         private void UpdateProduct(DataGridViewRow row, MySqlConnection conn, int id)
         {
-            var cmd = DatabaseHelper.CreateCommand("UPDATE products SET name=@name, price=@price, image=@image WHERE id=@id", conn);
+            var cmd = DatabaseHelper.CreateCommand("UPDATE products SET name=@name, price=@price, image=@image, stocks=@stocks WHERE id=@id", conn);
             AddProductParameters(cmd, row);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
@@ -292,6 +293,7 @@ namespace pizza_ordering_app
             cmd.Parameters.AddWithValue("@name", row.Cells["name"].Value);
             cmd.Parameters.AddWithValue("@price", Convert.ToDecimal(row.Cells["price"].Value));
             cmd.Parameters.AddWithValue("@image", ImageToBytes(row.Cells["image"].Value as Image));
+            cmd.Parameters.AddWithValue("@stocks", Convert.ToInt32(row.Cells["stocks"].Value));
         }
 
         private byte[] ImageToBytes(Image img)
