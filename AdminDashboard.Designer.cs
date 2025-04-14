@@ -31,7 +31,7 @@ namespace pizza_ordering_app
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelInventory = new System.Windows.Forms.Label();
+            this.lblProducts = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnInventory = new System.Windows.Forms.Button();
             this.btnSales = new System.Windows.Forms.Button();
@@ -49,16 +49,16 @@ namespace pizza_ordering_app
             this.ingStockAvailable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblIngredients = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.image = new System.Windows.Forms.DataGridViewImageColumn();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.image = new System.Windows.Forms.DataGridViewImageColumn();
             this.panelInventory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
@@ -66,16 +66,16 @@ namespace pizza_ordering_app
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // labelInventory
+            // lblProducts
             // 
-            this.labelInventory.AutoSize = true;
-            this.labelInventory.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInventory.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelInventory.Location = new System.Drawing.Point(24, 0);
-            this.labelInventory.Name = "labelInventory";
-            this.labelInventory.Size = new System.Drawing.Size(112, 25);
-            this.labelInventory.TabIndex = 0;
-            this.labelInventory.Text = "Products";
+            this.lblProducts.AutoSize = true;
+            this.lblProducts.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProducts.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblProducts.Location = new System.Drawing.Point(24, 0);
+            this.lblProducts.Name = "lblProducts";
+            this.lblProducts.Size = new System.Drawing.Size(112, 25);
+            this.lblProducts.TabIndex = 0;
+            this.lblProducts.Text = "Products";
             // 
             // btnLogout
             // 
@@ -122,11 +122,11 @@ namespace pizza_ordering_app
             this.panelInventory.Controls.Add(this.dgvIngredients);
             this.panelInventory.Controls.Add(this.btnDelete);
             this.panelInventory.Controls.Add(this.btnEdit);
-            this.panelInventory.Controls.Add(this.label1);
+            this.panelInventory.Controls.Add(this.lblIngredients);
             this.panelInventory.Controls.Add(this.btnSave);
             this.panelInventory.Controls.Add(this.btnAdd);
             this.panelInventory.Controls.Add(this.dgvProducts);
-            this.panelInventory.Controls.Add(this.labelInventory);
+            this.panelInventory.Controls.Add(this.lblProducts);
             this.panelInventory.Location = new System.Drawing.Point(155, 12);
             this.panelInventory.Name = "panelInventory";
             this.panelInventory.Size = new System.Drawing.Size(839, 547);
@@ -274,15 +274,15 @@ namespace pizza_ordering_app
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // lblIngredients
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(24, 274);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 25);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Ingredients";
+            this.lblIngredients.AutoSize = true;
+            this.lblIngredients.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIngredients.Location = new System.Drawing.Point(24, 274);
+            this.lblIngredients.Name = "lblIngredients";
+            this.lblIngredients.Size = new System.Drawing.Size(143, 25);
+            this.lblIngredients.TabIndex = 4;
+            this.lblIngredients.Text = "Ingredients";
             // 
             // btnSave
             // 
@@ -329,28 +329,6 @@ namespace pizza_ordering_app
             this.dgvProducts.Size = new System.Drawing.Size(787, 204);
             this.dgvProducts.TabIndex = 1;
             // 
-            // name
-            // 
-            this.name.HeaderText = "Name";
-            this.name.MinimumWidth = 6;
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // price
-            // 
-            this.price.HeaderText = "Price";
-            this.price.MinimumWidth = 6;
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            // 
-            // image
-            // 
-            this.image.HeaderText = "Image";
-            this.image.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.image.MinimumWidth = 6;
-            this.image.Name = "image";
-            this.image.ReadOnly = true;
-            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
@@ -375,6 +353,28 @@ namespace pizza_ordering_app
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Name";
+            this.name.MinimumWidth = 6;
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // price
+            // 
+            this.price.HeaderText = "Price";
+            this.price.MinimumWidth = 6;
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            // 
+            // image
+            // 
+            this.image.HeaderText = "Image";
+            this.image.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.image.MinimumWidth = 6;
+            this.image.Name = "image";
+            this.image.ReadOnly = true;
             // 
             // AdminDashboard
             // 
@@ -406,16 +406,13 @@ namespace pizza_ordering_app
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panelInventory;
-        private System.Windows.Forms.Label labelInventory;
+        private System.Windows.Forms.Label lblProducts;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DataGridView dgvProducts;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private DataGridViewTextBoxColumn name;
-        private DataGridViewTextBoxColumn price;
-        private DataGridViewImageColumn image;
-        private Label label1;
+        private Label lblIngredients;
         private Button btnDelete;
         private Button btnEdit;
         private DataGridView dgvIngredients;
@@ -429,5 +426,8 @@ namespace pizza_ordering_app
         private DataGridViewTextBoxColumn ingServingSize;
         private DataGridViewTextBoxColumn ingPrice;
         private DataGridViewTextBoxColumn ingStockAvailable;
+        private DataGridViewTextBoxColumn name;
+        private DataGridViewTextBoxColumn price;
+        private DataGridViewImageColumn image;
     }
 }

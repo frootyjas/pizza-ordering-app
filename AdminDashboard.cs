@@ -114,6 +114,9 @@ namespace pizza_ordering_app
                     }
                 }
             }
+            // Update the products label text with the current count
+            lblProducts.Text = $"Products ({dgvProducts.Rows.Count})";
+
         }
 
         private void LoadIngredients()
@@ -137,6 +140,9 @@ namespace pizza_ordering_app
                     }
                 }
             }
+            // Update the ingredients label text with the current count
+            lblIngredients.Text = $"Ingredients ({dgvIngredients.Rows.Count})";
+
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
