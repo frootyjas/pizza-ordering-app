@@ -59,11 +59,14 @@ namespace pizza_ordering_app
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.image = new System.Windows.Forms.DataGridViewImageColumn();
+            this.panelSales = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelInventory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelSales.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblProducts
@@ -376,25 +379,48 @@ namespace pizza_ordering_app
             this.image.Name = "image";
             this.image.ReadOnly = true;
             // 
+            // panelSales
+            // 
+            this.panelSales.Controls.Add(this.label1);
+            this.panelSales.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSales.Location = new System.Drawing.Point(0, 0);
+            this.panelSales.Name = "panelSales";
+            this.panelSales.Size = new System.Drawing.Size(1006, 571);
+            this.panelSales.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(312, 211);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(460, 91);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Sales Panel";
+            // 
             // AdminDashboard
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1006, 571);
-            this.Controls.Add(this.panelInventory);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnSales);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelInventory);
+            this.Controls.Add(this.panelSales);
             this.Name = "AdminDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
+            this.Load += new System.EventHandler(this.AdminDashboard_Load);
             this.panelInventory.ResumeLayout(false);
             this.panelInventory.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelSales.ResumeLayout(false);
+            this.panelSales.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -429,5 +455,7 @@ namespace pizza_ordering_app
         private DataGridViewTextBoxColumn name;
         private DataGridViewTextBoxColumn price;
         private DataGridViewImageColumn image;
+        private Panel panelSales;
+        private Label label1;
     }
 }

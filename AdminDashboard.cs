@@ -45,6 +45,7 @@ namespace pizza_ordering_app
 
         private void AdminDashboard_Load(object sender, EventArgs e)
         {
+            panelSales.Visible = true;  // Show Sales by default
             panelInventory.Visible = false;
             btnCancel.Visible = false;
             btnIngCancel.Visible = false;
@@ -425,8 +426,19 @@ namespace pizza_ordering_app
             cmd.Parameters.AddWithValue("@stock", Convert.ToDecimal(row.Cells["ingStockAvailable"].Value));
         }
 
-        private void BtnSales_Click(object sender, EventArgs e) => panelInventory.Visible = false;
-        private void BtnInventory_Click(object sender, EventArgs e) => panelInventory.Visible = true;
+        private void BtnSales_Click(object sender, EventArgs e)
+        {
+            // Show Sales panel, hide Inventory
+            panelSales.Visible = true;
+            panelInventory.Visible = false;
+        }
+
+        private void BtnInventory_Click(object sender, EventArgs e)
+        {
+            // Show Inventory panel, hide Sales
+            panelSales.Visible = false;
+            panelInventory.Visible = true;
+        }
         private void btnLogout_Click(object sender, EventArgs e) => ConfirmLogout();
 
         private void ConfirmLogout()
