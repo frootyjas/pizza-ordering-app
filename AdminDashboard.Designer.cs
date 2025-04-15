@@ -61,28 +61,31 @@ namespace pizza_ordering_app
             this.logoPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelSales = new System.Windows.Forms.Panel();
+            this.quantity = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.largeCheckbox = new System.Windows.Forms.CheckBox();
+            this.mediumCheckbox = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.smallCheckbox = new System.Windows.Forms.CheckBox();
+            this.btnAddToOrder = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panelAddOns = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.flpSalesProducts = new System.Windows.Forms.FlowLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.billSummaryPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
+            this.billPanel = new System.Windows.Forms.Panel();
+            this.finalTotalLabel = new System.Windows.Forms.Label();
+            this.finalTotal = new System.Windows.Forms.Label();
             this.panelInventory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.logoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelSales.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
+            this.billPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblProducts
@@ -92,7 +95,7 @@ namespace pizza_ordering_app
             this.lblProducts.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblProducts.Location = new System.Drawing.Point(24, 0);
             this.lblProducts.Name = "lblProducts";
-            this.lblProducts.Size = new System.Drawing.Size(112, 25);
+            this.lblProducts.Size = new System.Drawing.Size(86, 18);
             this.lblProducts.TabIndex = 0;
             this.lblProducts.Text = "Products";
             // 
@@ -300,7 +303,7 @@ namespace pizza_ordering_app
             this.lblIngredients.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIngredients.Location = new System.Drawing.Point(24, 274);
             this.lblIngredients.Name = "lblIngredients";
-            this.lblIngredients.Size = new System.Drawing.Size(143, 25);
+            this.lblIngredients.Size = new System.Drawing.Size(110, 18);
             this.lblIngredients.TabIndex = 4;
             this.lblIngredients.Text = "Ingredients";
             // 
@@ -407,14 +410,14 @@ namespace pizza_ordering_app
             // 
             // panelSales
             // 
-            this.panelSales.Controls.Add(this.numericUpDown1);
+            this.panelSales.Controls.Add(this.quantity);
             this.panelSales.Controls.Add(this.label5);
-            this.panelSales.Controls.Add(this.checkBox3);
-            this.panelSales.Controls.Add(this.checkBox2);
+            this.panelSales.Controls.Add(this.largeCheckbox);
+            this.panelSales.Controls.Add(this.mediumCheckbox);
             this.panelSales.Controls.Add(this.label4);
-            this.panelSales.Controls.Add(this.checkBox1);
-            this.panelSales.Controls.Add(this.button1);
-            this.panelSales.Controls.Add(this.panel1);
+            this.panelSales.Controls.Add(this.smallCheckbox);
+            this.panelSales.Controls.Add(this.btnAddToOrder);
+            this.panelSales.Controls.Add(this.billPanel);
             this.panelSales.Controls.Add(this.label3);
             this.panelSales.Controls.Add(this.label2);
             this.panelSales.Controls.Add(this.panelAddOns);
@@ -427,13 +430,97 @@ namespace pizza_ordering_app
             this.panelSales.TabIndex = 6;
             this.panelSales.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSales_Paint);
             // 
+            // quantity
+            // 
+            this.quantity.Location = new System.Drawing.Point(276, 370);
+            this.quantity.Name = "quantity";
+            this.quantity.Size = new System.Drawing.Size(76, 20);
+            this.quantity.TabIndex = 12;
+            this.quantity.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(179, 368);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 17);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Quantity";
+            // 
+            // largeCheckbox
+            // 
+            this.largeCheckbox.AutoSize = true;
+            this.largeCheckbox.Location = new System.Drawing.Point(598, 371);
+            this.largeCheckbox.Name = "largeCheckbox";
+            this.largeCheckbox.Size = new System.Drawing.Size(53, 17);
+            this.largeCheckbox.TabIndex = 10;
+            this.largeCheckbox.Text = "Large";
+            this.largeCheckbox.UseVisualStyleBackColor = true;
+            this.largeCheckbox.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
+            // mediumCheckbox
+            // 
+            this.mediumCheckbox.AutoSize = true;
+            this.mediumCheckbox.Location = new System.Drawing.Point(515, 371);
+            this.mediumCheckbox.Name = "mediumCheckbox";
+            this.mediumCheckbox.Size = new System.Drawing.Size(63, 17);
+            this.mediumCheckbox.TabIndex = 9;
+            this.mediumCheckbox.Text = "Medium";
+            this.mediumCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(392, 368);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 17);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Size";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // smallCheckbox
+            // 
+            this.smallCheckbox.AutoSize = true;
+            this.smallCheckbox.Location = new System.Drawing.Point(446, 371);
+            this.smallCheckbox.Name = "smallCheckbox";
+            this.smallCheckbox.Size = new System.Drawing.Size(51, 17);
+            this.smallCheckbox.TabIndex = 7;
+            this.smallCheckbox.Text = "Small";
+            this.smallCheckbox.UseVisualStyleBackColor = true;
+            this.smallCheckbox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // btnAddToOrder
+            // 
+            this.btnAddToOrder.BackgroundImage = global::pizza_ordering_app.Properties.Resources.Red_and_Green_Modern_Pizza_Presentation;
+            this.btnAddToOrder.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnAddToOrder.Location = new System.Drawing.Point(612, 529);
+            this.btnAddToOrder.Name = "btnAddToOrder";
+            this.btnAddToOrder.Size = new System.Drawing.Size(113, 30);
+            this.btnAddToOrder.TabIndex = 6;
+            this.btnAddToOrder.Text = "Add to Order";
+            this.btnAddToOrder.UseVisualStyleBackColor = true;
+            this.btnAddToOrder.Click += new System.EventHandler(this.btnAddToOrder_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(737, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(120, 18);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Bill Summary";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(180, 409);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 20);
+            this.label2.Size = new System.Drawing.Size(74, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Add-ons";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -452,7 +539,7 @@ namespace pizza_ordering_app
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(179, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(154, 25);
+            this.label1.Size = new System.Drawing.Size(118, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Point of Sale";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -465,109 +552,59 @@ namespace pizza_ordering_app
             this.flpSalesProducts.Size = new System.Drawing.Size(567, 310);
             this.flpSalesProducts.TabIndex = 1;
             // 
-            // label3
+            // billSummaryPanel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(737, 15);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(161, 25);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Bill Summary";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Location = new System.Drawing.Point(742, 40);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(235, 519);
-            this.panel1.TabIndex = 5;
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::pizza_ordering_app.Properties.Resources.Red_and_Green_Modern_Pizza_Presentation;
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(612, 529);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 30);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Add to Order";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(446, 371);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(63, 20);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Small";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(392, 368);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 20);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Size";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(515, 371);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(77, 20);
-            this.checkBox2.TabIndex = 9;
-            this.checkBox2.Text = "Medium";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(598, 371);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(64, 20);
-            this.checkBox3.TabIndex = 10;
-            this.checkBox3.Text = "Large";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(179, 368);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 20);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Quantity";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(276, 370);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(76, 22);
-            this.numericUpDown1.TabIndex = 12;
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            this.billSummaryPanel.AutoScroll = true;
+            this.billSummaryPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.billSummaryPanel.Location = new System.Drawing.Point(0, 0);
+            this.billSummaryPanel.Name = "billSummaryPanel";
+            this.billSummaryPanel.Size = new System.Drawing.Size(235, 439);
+            this.billSummaryPanel.TabIndex = 14;
+            this.billSummaryPanel.WrapContents = false;
             // 
             // button2
             // 
             this.button2.BackgroundImage = global::pizza_ordering_app.Properties.Resources.Red_and_Green_Modern_Pizza_Presentation;
             this.button2.Font = new System.Drawing.Font("Verdana", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button2.Location = new System.Drawing.Point(7, 461);
+            this.button2.Location = new System.Drawing.Point(4, 464);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(225, 55);
             this.button2.TabIndex = 13;
             this.button2.Text = "Place Order";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // billPanel
+            // 
+            this.billPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.billPanel.Controls.Add(this.finalTotal);
+            this.billPanel.Controls.Add(this.finalTotalLabel);
+            this.billPanel.Controls.Add(this.button2);
+            this.billPanel.Controls.Add(this.billSummaryPanel);
+            this.billPanel.Location = new System.Drawing.Point(742, 40);
+            this.billPanel.Name = "billPanel";
+            this.billPanel.Size = new System.Drawing.Size(235, 519);
+            this.billPanel.TabIndex = 5;
+            // 
+            // finalTotalLabel
+            // 
+            this.finalTotalLabel.AutoSize = true;
+            this.finalTotalLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.finalTotalLabel.Location = new System.Drawing.Point(13, 445);
+            this.finalTotalLabel.Name = "finalTotalLabel";
+            this.finalTotalLabel.Size = new System.Drawing.Size(48, 16);
+            this.finalTotalLabel.TabIndex = 15;
+            this.finalTotalLabel.Text = "Total:";
+            this.finalTotalLabel.Click += new System.EventHandler(this.finalTotalLabel_Click);
+            // 
+            // finalTotal
+            // 
+            this.finalTotal.AutoSize = true;
+            this.finalTotal.Location = new System.Drawing.Point(67, 448);
+            this.finalTotal.Name = "finalTotal";
+            this.finalTotal.Size = new System.Drawing.Size(28, 13);
+            this.finalTotal.TabIndex = 16;
+            this.finalTotal.Text = "0.00";
             // 
             // AdminDashboard
             // 
@@ -592,8 +629,9 @@ namespace pizza_ordering_app
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelSales.ResumeLayout(false);
             this.panelSales.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.quantity)).EndInit();
+            this.billPanel.ResumeLayout(false);
+            this.billPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -635,14 +673,17 @@ namespace pizza_ordering_app
         private Label label2;
         private Panel panelAddOns;
         private Label label3;
-        private Panel panel1;
-        private Button button1;
+        private Button btnAddToOrder;
         private Label label4;
-        private CheckBox checkBox1;
-        private CheckBox checkBox3;
-        private CheckBox checkBox2;
+        private CheckBox smallCheckbox;
+        private CheckBox largeCheckbox;
+        private CheckBox mediumCheckbox;
         private Label label5;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown quantity;
+        private FlowLayoutPanel billSummaryPanel;
+        private Panel billPanel;
         private Button button2;
+        private Label finalTotal;
+        private Label finalTotalLabel;
     }
 }

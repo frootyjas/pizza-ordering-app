@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -14,6 +15,9 @@ namespace pizza_ordering_app
         private bool isEditing = false;
         private bool isEditingIngredient = false;
 
+   
+
+
         public AdminDashboard()
         {
             InitializeComponent();
@@ -22,6 +26,16 @@ namespace pizza_ordering_app
             SetupIngredientGrid();
             LoadProducts();
             LoadIngredients();
+
+
+            // Force vertical scrollbar to always appear
+            billSummaryPanel.AutoScroll = true;
+            billSummaryPanel.AutoScrollMinSize = new Size(0, billSummaryPanel.ClientSize.Height + 1);
+
+
+       
+
+
         }
 
         private void InitializeEventHandlers()
@@ -36,6 +50,10 @@ namespace pizza_ordering_app
             btnCancel.Click += BtnCancel_Click;
             dgvProducts.CellClick += DgvProducts_CellClick;
 
+            smallCheckbox.CheckedChanged += SizeCheckBox_CheckedChanged;
+            mediumCheckbox.CheckedChanged += SizeCheckBox_CheckedChanged;
+            largeCheckbox.CheckedChanged += SizeCheckBox_CheckedChanged;
+
             btnIngAdd.Click += BtnIngAdd_Click;
             btnIngSave.Click += BtnIngSave_Click;
             btnIngEdit.Click += BtnIngEdit_Click;
@@ -47,12 +65,21 @@ namespace pizza_ordering_app
             LoadIngredientCheckboxes();
         }
 
+
+
+
         private void AdminDashboard_Load(object sender, EventArgs e)
+
+
         {
             panelSales.Visible = true;  // Show Sales by default
             panelInventory.Visible = false;
             btnCancel.Visible = false;
             btnIngCancel.Visible = false;
+
+
+
+ 
         }
 
         private void SetupProductGrid()
@@ -197,6 +224,10 @@ namespace pizza_ordering_app
                             Tag = id // store product id
                         };
 
+                        btnAddToCart.Click += BtnAddToCart_Click;
+
+                        productPanel.Controls.Add(btnAddToCart);
+
                         // Add controls
                         productPanel.Controls.Add(btnAddToCart);
                         productPanel.Controls.Add(priceLabel);
@@ -247,11 +278,240 @@ namespace pizza_ordering_app
 
         }
 
+        private int selectedProductId = -1;
 
         public class Ingredient
         {
             public int Id { get; set; }
             public string Name { get; set; }
+            public decimal PricePerServing { get; set; }
+        }
+
+        public class Product
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public decimal Price { get; set; }
+        }
+
+        public class OrderItem
+        {
+            public int ProductId { get; set; }
+            public string ProductName { get; set; }
+            public string Size { get; set; }
+            public List<int> AddOnIds { get; set; }
+            public List<string> AddOnNames { get; set; }
+            public int Quantity { get; set; }
+            public decimal Total { get; set; }
+            public Panel Panel { get; set; }
+        }
+
+        private List<OrderItem> currentOrderItems = new List<OrderItem>();
+
+        private void SizeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            if (cb.Checked)
+            {
+                foreach (CheckBox otherCb in new[] { smallCheckbox, mediumCheckbox, largeCheckbox })
+                {
+                    if (otherCb != cb)
+                    {
+                        otherCb.Checked = false;
+                    }
+                }
+            }
+        }
+        private void btnAddToOrder_Click(object sender, EventArgs e)
+        {
+            if (selectedProductId == -1)
+            {
+                MessageBox.Show("Please select a pizza first.");
+                return;
+            }
+
+            if (!smallCheckbox.Checked && !mediumCheckbox.Checked && !largeCheckbox.Checked)
+            {
+                MessageBox.Show("Please select a size.");
+                return;
+            }
+
+            string size = smallCheckbox.Checked ? "Small" : mediumCheckbox.Checked ? "Medium" : "Large";
+            int qty = (int)quantity.Value;
+
+            List<Ingredient> selectedAddOns = new List<Ingredient>();
+            foreach (Control control in panelAddOns.Controls)
+            {
+                if (control is CheckBox chk && chk.Checked)
+                {
+                    int ingredientId = (int)chk.Tag;
+                    Ingredient ingredient = GetIngredientById(ingredientId);
+                    if (ingredient != null)
+                        selectedAddOns.Add(ingredient);
+                }
+            }
+
+            Product product = GetProductById(selectedProductId);
+            if (product == null)
+            {
+                MessageBox.Show("Product not found.");
+                return;
+            }
+
+            decimal total = product.Price * qty;
+            foreach (var addOn in selectedAddOns)
+                total += addOn.PricePerServing * qty;
+
+            List<int> addOnIds = selectedAddOns.Select(a => a.Id).OrderBy(id => id).ToList();
+            var existingItem = currentOrderItems.FirstOrDefault(item =>
+                item.ProductId == selectedProductId &&
+                item.Size == size &&
+                item.AddOnIds.OrderBy(id => id).SequenceEqual(addOnIds));
+
+            Console.WriteLine($"Product ID: {selectedProductId}, Size: {size}, Qty: {qty}");
+
+            if (existingItem != null)
+            {
+                existingItem.Quantity += qty;
+                existingItem.Total += total;
+                UpdateOrderItemPanel(existingItem);
+            }
+            else
+            {
+                List<string> addOnNames = selectedAddOns.Select(a => a.Name).ToList();
+                OrderItem newItem = new OrderItem
+                {
+                    ProductId = selectedProductId,
+                    ProductName = product.Name,
+                    Size = size,
+                    AddOnIds = addOnIds,
+                    AddOnNames = addOnNames,
+                    Quantity = qty,
+                    Total = total,
+                    Panel = CreateOrderItemPanel(product.Name, size, qty, addOnNames, total)
+                };
+                currentOrderItems.Add(newItem);
+                // Add the panel to the FlowLayoutPanel
+                billSummaryPanel.Controls.Add(newItem.Panel);
+                UpdateFinalTotal();
+
+                // Scroll to the new item
+                billSummaryPanel.ScrollControlIntoView(newItem.Panel);
+
+
+
+            }
+            // Force UI refresh
+            billSummaryPanel.PerformLayout();
+            billSummaryPanel.Refresh();
+
+            // Reset UI
+            selectedProductId = -1;
+            quantity.Value = 1;
+            smallCheckbox.Checked = mediumCheckbox.Checked = largeCheckbox.Checked = false;
+            foreach (CheckBox chk in panelAddOns.Controls.OfType<CheckBox>())
+                chk.Checked = false;
+        }
+        private Panel CreateOrderItemPanel(string productName, string size, int quantity, List<string> addOnNames, decimal total)
+        {
+            Panel itemPanel = new Panel
+            {
+                Width = billSummaryPanel.Width - 25, // Adjust for scrollbar
+                Height = 50,
+                Margin = new Padding(5),
+                BackColor = Color.White, 
+                //BorderStyle = BorderStyle.FixedSingle
+            };
+
+            Label lblDetails = new Label
+            {
+                Text = $"{productName} ({size}) x{quantity} | Add-ons: {GetAddOnsText(addOnNames)} | Total: ₱{total:N2}",
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleLeft
+            };
+
+            itemPanel.Controls.Add(lblDetails);
+            return itemPanel;
+        }
+        private void UpdateOrderItemPanel(OrderItem item)
+        {
+            Label lbl = item.Panel.Controls.OfType<Label>().First();
+            lbl.Text = $"{item.ProductName} ({item.Size}) x{item.Quantity} | Add-ons: {GetAddOnsText(item.AddOnNames)} | Total: ₱{item.Total:N2}";
+        }
+
+        private void UpdateFinalTotal()
+        {
+            decimal finalTotalValue = currentOrderItems.Sum(item => item.Total);
+            finalTotal.Text = $"Total: ₱{finalTotalValue:N2}";
+        }
+
+
+
+        private string GetAddOnsText(List<string> addOnNames)
+        {
+            return addOnNames.Count == 0 ? "None" : string.Join(", ", addOnNames);
+        }
+
+        private Product GetProductById(int productId)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                var cmd = DatabaseHelper.CreateCommand("SELECT name, price FROM products WHERE id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", productId);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                        return new Product
+                        {
+                            Id = productId,
+                            Name = reader["name"].ToString(),
+                            Price = Convert.ToDecimal(reader["price"])
+                        };
+                }
+            }
+            return null;
+        }
+
+        private Ingredient GetIngredientById(int ingredientId)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                var cmd = DatabaseHelper.CreateCommand("SELECT name, price_per_serving FROM ingredients WHERE id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", ingredientId);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                        return new Ingredient
+                        {
+                            Id = ingredientId,
+                            Name = reader["name"].ToString(),
+                            PricePerServing = Convert.ToDecimal(reader["price_per_serving"])
+                        };
+                }
+            }
+            return null;
+        }
+
+      
+
+        private void BtnAddToCart_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int productId = (int)button.Tag;
+
+            if (selectedProductId != productId)
+            {
+                // New pizza selected: reset quantity to 1
+                selectedProductId = productId;
+                quantity.Value = 1;
+            }
+            else
+            {
+                // Same pizza: increment quantity
+                quantity.Value++;
+            }
         }
 
 
@@ -649,6 +909,11 @@ namespace pizza_ordering_app
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void finalTotalLabel_Click(object sender, EventArgs e)
         {
 
         }
