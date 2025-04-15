@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -41,6 +42,9 @@ namespace pizza_ordering_app
             btnIngDelete.Click += BtnIngDelete_Click;
             btnIngCancel.Click += BtnIngCancel_Click;
             dgvIngredients.CellClick += DgvIngredients_CellClick;
+
+            LoadSalesProducts();
+            LoadIngredientCheckboxes();
         }
 
         private void AdminDashboard_Load(object sender, EventArgs e)
@@ -124,6 +128,159 @@ namespace pizza_ordering_app
 
         }
 
+        private void LoadSalesProducts()
+        {
+            flpSalesProducts.Controls.Clear(); // Clear existing controls
+
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                var cmd = DatabaseHelper.CreateCommand("SELECT id, name, price, image FROM products", conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        // Read product info
+                        int id = Convert.ToInt32(reader["id"]);
+                        string name = reader["name"].ToString();
+                        decimal price = Convert.ToDecimal(reader["price"]);
+                        byte[] imageBytes = (byte[])reader["image"];
+
+                        // Convert image
+                        Image productImage;
+                        using (var ms = new MemoryStream(imageBytes))
+                        {
+                            productImage = Image.FromStream(ms);
+                        }
+
+                        // Create product panel
+                        var productPanel = new Panel
+                        {
+                            Width = 170,
+                            Height = 200,
+                            Margin = new Padding(10),
+                            BackColor = Color.White
+                        };
+
+                        var picBox = new PictureBox
+                        {
+                            Image = productImage,
+                            SizeMode = PictureBoxSizeMode.Zoom,
+                            Dock = DockStyle.Top,
+                            Height = 100
+                        };
+
+                        var nameLabel = new Label
+                        {
+                            Text = name,
+                            TextAlign = ContentAlignment.MiddleCenter,
+                            Dock = DockStyle.Top,
+                            Height = 30,
+                            Font = new Font("Verdana", 9, FontStyle.Bold) 
+                        };
+
+                        var priceLabel = new Label
+                        {
+                            Text = $"₱{price:N2}",
+                            TextAlign = ContentAlignment.MiddleCenter,
+                            Dock = DockStyle.Top,
+                            Height = 25,
+                            ForeColor = Color.Green,
+                            Font = new Font("Verdana", 8, FontStyle.Regular) 
+                        };
+
+
+                        var btnAddToCart = new Button
+                        {
+                            Text = "Add to Order",
+                            Dock = DockStyle.Bottom,
+                            Tag = id // store product id
+                        };
+
+                        // Add controls
+                        productPanel.Controls.Add(btnAddToCart);
+                        productPanel.Controls.Add(priceLabel);
+                        productPanel.Controls.Add(nameLabel);
+                        productPanel.Controls.Add(picBox);
+
+                        flpSalesProducts.Controls.Add(productPanel);
+                    }
+                }
+            }
+        }
+
+        private void LoadIngredientCheckboxes()
+        {
+            panelAddOns.Controls.Clear();
+            var ingredients = GetAllIngredients();
+
+            int x = 10;
+            int y = 10;
+            int colCount = 3;
+            int colWidth = 150; // Adjust width between columns
+
+            for (int i = 0; i < ingredients.Count; i++)
+            {
+                var ingredient = ingredients[i];
+
+                var chk = new CheckBox
+                {
+                    Text = ingredient.Name,
+                    Tag = ingredient.Id,
+                    AutoSize = true,
+                    Location = new Point(x, y)
+                };
+
+                panelAddOns.Controls.Add(chk);
+
+                // Move to next column or row
+                if ((i + 1) % colCount == 0)
+                {
+                    x = 10;
+                    y += chk.Height + 5;
+                }
+                else
+                {
+                    x += colWidth;
+                }
+            }
+
+        }
+
+
+        public class Ingredient
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
+
+
+        private List<Ingredient> GetAllIngredients()
+        {
+            var ingredients = new List<Ingredient>();
+
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                var cmd = DatabaseHelper.CreateCommand("SELECT id, name FROM ingredients", conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ingredients.Add(new Ingredient
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            Name = reader["name"].ToString()
+                        });
+                    }
+                }
+            }
+
+            return ingredients;
+        }
+
+
+
         private void LoadIngredients()
         {
             dgvIngredients.Rows.Clear();
@@ -187,6 +344,7 @@ namespace pizza_ordering_app
                     InsertProduct(row, conn);
             }
             LoadProducts();
+            LoadSalesProducts();
             ResetEditingState();
             MessageBox.Show("Product saved successfully.", "Save Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -210,6 +368,7 @@ namespace pizza_ordering_app
                 {
                     DeleteProduct(id);
                     LoadProducts();
+                    LoadSalesProducts();
                 }
             }
         }
@@ -433,6 +592,8 @@ namespace pizza_ordering_app
             // Show Sales panel, hide Inventory
             panelSales.Visible = true;
             panelInventory.Visible = false;
+            LoadSalesProducts();
+            LoadIngredientCheckboxes();
         }
 
         private void BtnInventory_Click(object sender, EventArgs e)
@@ -450,6 +611,16 @@ namespace pizza_ordering_app
                 new Login().Show();
                 Close();
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

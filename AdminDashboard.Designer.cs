@@ -53,15 +53,18 @@ namespace pizza_ordering_app
             this.btnSave = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.image = new System.Windows.Forms.DataGridViewImageColumn();
+            this.stocks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelSales = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.image = new System.Windows.Forms.DataGridViewImageColumn();
-            this.stocks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.flpSalesProducts = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelAddOns = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.panelInventory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
@@ -336,50 +339,6 @@ namespace pizza_ordering_app
             this.dgvProducts.Size = new System.Drawing.Size(787, 204);
             this.dgvProducts.TabIndex = 1;
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            // 
-            // panel1
-            // 
-            this.panel1.BackgroundImage = global::pizza_ordering_app.Properties.Resources.Red_and_Green_Modern_Pizza_Presentation;
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(147, 571);
-            this.panel1.TabIndex = 5;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.pictureBox1.Image = global::pizza_ordering_app.Properties.Resources.Beige_Red_Fun_Food_Pizza_Loyalty_Card__3_3;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(124, 124);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
-            // panelSales
-            // 
-            this.panelSales.Controls.Add(this.label1);
-            this.panelSales.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSales.Location = new System.Drawing.Point(0, 0);
-            this.panelSales.Name = "panelSales";
-            this.panelSales.Size = new System.Drawing.Size(1006, 571);
-            this.panelSales.TabIndex = 6;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(312, 211);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(460, 91);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Sales Panel";
-            // 
             // name
             // 
             this.name.HeaderText = "Name";
@@ -409,7 +368,81 @@ namespace pizza_ordering_app
             this.stocks.Name = "stocks";
             this.stocks.ReadOnly = true;
             // 
-               // AdminDashboard
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = global::pizza_ordering_app.Properties.Resources.Red_and_Green_Modern_Pizza_Presentation;
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(147, 571);
+            this.panel1.TabIndex = 5;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pictureBox1.Image = global::pizza_ordering_app.Properties.Resources.Beige_Red_Fun_Food_Pizza_Loyalty_Card__3_3;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(124, 124);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // panelSales
+            // 
+            this.panelSales.Controls.Add(this.label2);
+            this.panelSales.Controls.Add(this.panelAddOns);
+            this.panelSales.Controls.Add(this.label1);
+            this.panelSales.Controls.Add(this.flpSalesProducts);
+            this.panelSales.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSales.Location = new System.Drawing.Point(0, 0);
+            this.panelSales.Name = "panelSales";
+            this.panelSales.Size = new System.Drawing.Size(1006, 571);
+            this.panelSales.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(179, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(154, 25);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Point of Sale";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // flpSalesProducts
+            // 
+            this.flpSalesProducts.AutoScroll = true;
+            this.flpSalesProducts.Location = new System.Drawing.Point(173, 30);
+            this.flpSalesProducts.Name = "flpSalesProducts";
+            this.flpSalesProducts.Size = new System.Drawing.Size(818, 291);
+            this.flpSalesProducts.TabIndex = 1;
+            // 
+            // panelAddOns
+            // 
+            this.panelAddOns.Location = new System.Drawing.Point(173, 370);
+            this.panelAddOns.Name = "panelAddOns";
+            this.panelAddOns.Size = new System.Drawing.Size(397, 186);
+            this.panelAddOns.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(179, 353);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(106, 25);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Add-ons";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // AdminDashboard
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -418,8 +451,8 @@ namespace pizza_ordering_app
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnSales);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panelInventory);
             this.Controls.Add(this.panelSales);
+            this.Controls.Add(this.panelInventory);
             this.Name = "AdminDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
@@ -469,5 +502,8 @@ namespace pizza_ordering_app
         private DataGridViewTextBoxColumn price;
         private DataGridViewImageColumn image;
         private DataGridViewTextBoxColumn stocks;
+        private FlowLayoutPanel flpSalesProducts;
+        private Label label2;
+        private Panel panelAddOns;
     }
 }
