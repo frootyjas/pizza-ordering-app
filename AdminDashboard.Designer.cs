@@ -58,17 +58,17 @@ namespace pizza_ordering_app
             this.image = new System.Windows.Forms.DataGridViewImageColumn();
             this.stocks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.logoPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelSales = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panelAddOns = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.flpSalesProducts = new System.Windows.Forms.FlowLayoutPanel();
-            this.panelAddOns = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.panelInventory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.logoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelSales.SuspendLayout();
             this.SuspendLayout();
@@ -80,7 +80,7 @@ namespace pizza_ordering_app
             this.lblProducts.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblProducts.Location = new System.Drawing.Point(24, 0);
             this.lblProducts.Name = "lblProducts";
-            this.lblProducts.Size = new System.Drawing.Size(112, 25);
+            this.lblProducts.Size = new System.Drawing.Size(86, 18);
             this.lblProducts.TabIndex = 0;
             this.lblProducts.Text = "Products";
             // 
@@ -288,7 +288,7 @@ namespace pizza_ordering_app
             this.lblIngredients.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIngredients.Location = new System.Drawing.Point(24, 274);
             this.lblIngredients.Name = "lblIngredients";
-            this.lblIngredients.Size = new System.Drawing.Size(143, 25);
+            this.lblIngredients.Size = new System.Drawing.Size(110, 18);
             this.lblIngredients.TabIndex = 4;
             this.lblIngredients.Text = "Ingredients";
             // 
@@ -372,15 +372,15 @@ namespace pizza_ordering_app
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // panel1
+            // logoPanel
             // 
-            this.panel1.BackgroundImage = global::pizza_ordering_app.Properties.Resources.Red_and_Green_Modern_Pizza_Presentation;
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(147, 571);
-            this.panel1.TabIndex = 5;
+            this.logoPanel.BackgroundImage = global::pizza_ordering_app.Properties.Resources.Red_and_Green_Modern_Pizza_Presentation;
+            this.logoPanel.Controls.Add(this.pictureBox1);
+            this.logoPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.logoPanel.Location = new System.Drawing.Point(0, 0);
+            this.logoPanel.Name = "logoPanel";
+            this.logoPanel.Size = new System.Drawing.Size(147, 571);
+            this.logoPanel.TabIndex = 5;
             // 
             // pictureBox1
             // 
@@ -405,13 +405,31 @@ namespace pizza_ordering_app
             this.panelSales.Size = new System.Drawing.Size(1006, 571);
             this.panelSales.TabIndex = 6;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(179, 353);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(81, 18);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Add-ons";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // panelAddOns
+            // 
+            this.panelAddOns.Location = new System.Drawing.Point(173, 370);
+            this.panelAddOns.Name = "panelAddOns";
+            this.panelAddOns.Size = new System.Drawing.Size(397, 186);
+            this.panelAddOns.TabIndex = 2;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(179, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(154, 25);
+            this.label1.Size = new System.Drawing.Size(118, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Point of Sale";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -424,24 +442,6 @@ namespace pizza_ordering_app
             this.flpSalesProducts.Size = new System.Drawing.Size(818, 291);
             this.flpSalesProducts.TabIndex = 1;
             // 
-            // panelAddOns
-            // 
-            this.panelAddOns.Location = new System.Drawing.Point(173, 370);
-            this.panelAddOns.Name = "panelAddOns";
-            this.panelAddOns.Size = new System.Drawing.Size(397, 186);
-            this.panelAddOns.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(179, 353);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 25);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Add-ons";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
             // AdminDashboard
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -450,7 +450,7 @@ namespace pizza_ordering_app
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnSales);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.logoPanel);
             this.Controls.Add(this.panelSales);
             this.Controls.Add(this.panelInventory);
             this.Name = "AdminDashboard";
@@ -461,7 +461,7 @@ namespace pizza_ordering_app
             this.panelInventory.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.logoPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelSales.ResumeLayout(false);
             this.panelSales.PerformLayout();
@@ -477,7 +477,7 @@ namespace pizza_ordering_app
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panelInventory;
         private System.Windows.Forms.Label lblProducts;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel logoPanel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DataGridView dgvProducts;
