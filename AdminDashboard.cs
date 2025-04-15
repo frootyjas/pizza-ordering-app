@@ -158,7 +158,7 @@ namespace pizza_ordering_app
                         {
                             Width = 170,
                             Height = 200,
-                            Margin = new Padding(10),
+                            Margin = new Padding(5),
                             BackColor = Color.White
                         };
 
@@ -192,7 +192,7 @@ namespace pizza_ordering_app
 
                         var btnAddToCart = new Button
                         {
-                            Text = "Add to Order",
+                            Text = "Select",
                             Dock = DockStyle.Bottom,
                             Tag = id // store product id
                         };
@@ -217,7 +217,7 @@ namespace pizza_ordering_app
             int x = 10;
             int y = 10;
             int colCount = 3;
-            int colWidth = 150; // Adjust width between columns
+            int colWidth = 130;
 
             for (int i = 0; i < ingredients.Count; i++)
             {
@@ -619,6 +619,36 @@ namespace pizza_ordering_app
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelSales_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
