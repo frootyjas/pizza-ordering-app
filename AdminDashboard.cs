@@ -15,12 +15,13 @@ namespace pizza_ordering_app
         private bool isEditing = false;
         private bool isEditingIngredient = false;
 
-   
 
+        private string userRole;    
 
-        public AdminDashboard()
+        public AdminDashboard(string role)
         {
             InitializeComponent();
+            userRole = role;
             InitializeEventHandlers();
             SetupProductGrid();
             SetupIngredientGrid();
@@ -69,17 +70,14 @@ namespace pizza_ordering_app
 
 
         private void AdminDashboard_Load(object sender, EventArgs e)
-
-
         {
             panelSales.Visible = true;  // Show Sales by default
             panelInventory.Visible = false;
             btnCancel.Visible = false;
             btnIngCancel.Visible = false;
 
-
-
- 
+            // Hide Inventory button if user is staff
+            btnInventory.Visible = (userRole == "admin");
         }
 
         private void SetupProductGrid()

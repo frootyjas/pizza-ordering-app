@@ -78,6 +78,7 @@ namespace pizza_ordering_app
             this.billPanel = new System.Windows.Forms.Panel();
             this.finalTotalLabel = new System.Windows.Forms.Label();
             this.finalTotal = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelInventory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
@@ -86,6 +87,7 @@ namespace pizza_ordering_app
             this.panelSales.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
             this.billPanel.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblProducts
@@ -103,7 +105,7 @@ namespace pizza_ordering_app
             // 
             this.btnLogout.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnLogout.Location = new System.Drawing.Point(12, 264);
+            this.btnLogout.Location = new System.Drawing.Point(3, 109);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(124, 47);
             this.btnLogout.TabIndex = 2;
@@ -115,7 +117,7 @@ namespace pizza_ordering_app
             // 
             this.btnInventory.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInventory.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnInventory.Location = new System.Drawing.Point(12, 211);
+            this.btnInventory.Location = new System.Drawing.Point(3, 56);
             this.btnInventory.Name = "btnInventory";
             this.btnInventory.Size = new System.Drawing.Size(124, 47);
             this.btnInventory.TabIndex = 1;
@@ -126,7 +128,7 @@ namespace pizza_ordering_app
             // 
             this.btnSales.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSales.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnSales.Location = new System.Drawing.Point(12, 158);
+            this.btnSales.Location = new System.Drawing.Point(3, 3);
             this.btnSales.Name = "btnSales";
             this.btnSales.Size = new System.Drawing.Size(124, 47);
             this.btnSales.TabIndex = 0;
@@ -390,6 +392,7 @@ namespace pizza_ordering_app
             // logoPanel
             // 
             this.logoPanel.BackgroundImage = global::pizza_ordering_app.Properties.Resources.Red_and_Green_Modern_Pizza_Presentation;
+            this.logoPanel.Controls.Add(this.flowLayoutPanel1);
             this.logoPanel.Controls.Add(this.pictureBox1);
             this.logoPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.logoPanel.Location = new System.Drawing.Point(0, 0);
@@ -600,20 +603,31 @@ namespace pizza_ordering_app
             // finalTotal
             // 
             this.finalTotal.AutoSize = true;
-            this.finalTotal.Location = new System.Drawing.Point(67, 448);
+            this.finalTotal.Location = new System.Drawing.Point(67, 447);
             this.finalTotal.Name = "finalTotal";
             this.finalTotal.Size = new System.Drawing.Size(28, 13);
             this.finalTotal.TabIndex = 16;
             this.finalTotal.Text = "0.00";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.flowLayoutPanel1.Controls.Add(this.btnSales);
+            this.flowLayoutPanel1.Controls.Add(this.btnInventory);
+            this.flowLayoutPanel1.Controls.Add(this.btnLogout);
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(8, 171);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(136, 162);
+            this.flowLayoutPanel1.TabIndex = 5;
+            this.flowLayoutPanel1.WrapContents = false;
             // 
             // AdminDashboard
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1006, 571);
-            this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.btnInventory);
-            this.Controls.Add(this.btnSales);
             this.Controls.Add(this.logoPanel);
             this.Controls.Add(this.panelSales);
             this.Controls.Add(this.panelInventory);
@@ -626,12 +640,14 @@ namespace pizza_ordering_app
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.logoPanel.ResumeLayout(false);
+            this.logoPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelSales.ResumeLayout(false);
             this.panelSales.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).EndInit();
             this.billPanel.ResumeLayout(false);
             this.billPanel.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -685,5 +701,6 @@ namespace pizza_ordering_app
         private Button button2;
         private Label finalTotal;
         private Label finalTotalLabel;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

@@ -20,10 +20,9 @@ namespace pizza_ordering_app
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //string username = txtUsername.Text.Trim();
-            //string password = txtPassword.Text.Trim();
-            string username = "admin1";
-            string password = "adminpass";
+            string username = txtUsername.Text.Trim();
+            string password = txtPassword.Text.Trim();
+
 
             using (var conn = DatabaseHelper.GetConnection())
             {
@@ -42,16 +41,10 @@ namespace pizza_ordering_app
                         string role = reader["role"].ToString();
                         MessageBox.Show("Login successful!");
 
-                        if (role == "admin")
-                        {
-                            AdminDashboard adminForm = new AdminDashboard();
-                            adminForm.Show();
-                            this.Hide();
-                        }
-                        else if (role == "staff")
-                        {
-                            // open Staff Dashboard
-                        }
+                        // Pass the role to AdminDashboard
+                        AdminDashboard adminForm = new AdminDashboard(role); // Updated line
+                        adminForm.Show();
+                        this.Hide();
                     }
                     else
                     {
